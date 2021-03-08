@@ -20,7 +20,7 @@ class BlogModel
         $query = $this->db->prepare("SELECT `*` FROM `blog-posts` WHERE deleted=0");
         $query->execute();
         $blog = $query->fetchAll();
-        return $blogPost;
+        return $blog;
     }
 
     public function createNewEntry($blogpost): bool
