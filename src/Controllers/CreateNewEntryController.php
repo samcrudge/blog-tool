@@ -39,13 +39,13 @@ class CreateNewEntryController extends Controller
 
         if($BlogPost->validate()) {
 
-            $result = $this->BlogModel->CreateNewEntry($BlogPost);
+            $Result = $this->BlogModel->CreateNewEntry($BlogPost);
 
-            if ($result) {
+            if ($Result) {
 
                 $ResponseData['success'] = true;
                 $ResponseData['message'] = "Your post has been successfully saved!";
-                $ResponseData['data'] = $result;
+                $ResponseData['data'] = $Result;
                 return $this->respondWithJson($response, $ResponseData, 200);
             }
         } else {
