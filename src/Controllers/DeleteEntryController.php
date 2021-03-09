@@ -22,7 +22,7 @@ class DeleteEntryController extends Controller
     public function __invoke(Request $request, Response $response, array $args)
     {
         $DeletedEntry = $request->getParsedBody();
-        $DbResult = $this->BlogModel->DeleteEntry($DeletedEntry);
+        $this->BlogModel->DeleteEntry($DeletedEntry);
         return $response->withHeader('Location', '/');
     }
 
