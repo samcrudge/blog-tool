@@ -35,5 +35,5 @@ return function (ContainerBuilder $containerBuilder) {
 
     $containerBuilder->addDefinitions($container);
 
-    $container['db'] = new \App\Db\DbConnection();
+    $container['db'] = new \App\Db\dbConnection();
 };
