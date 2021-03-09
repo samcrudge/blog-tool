@@ -37,7 +37,7 @@ class CreateNewEntryController extends Controller
         $BlogPost->rule('lengthMin', 'author', 1);
         $BlogPost->rule('date', 'date');
 
-        if($BlogPost->validate()) {
+        if($BlogPost->validate() === true) {
             $this->BlogModel->CreateNewEntry($BlogPost);
             return $response->withStatus(200);
         } else {
