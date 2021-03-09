@@ -6,23 +6,23 @@ use App\Abstracts\Controller;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class deleteEntryController extends Controller
+class DeleteEntryController extends Controller
 {
-    private $blogModel;
+    private $BlogModel;
 
     /**
      * deleteEntryController constructor.
-     * @param $blogModel
+     * @param $BlogModel
      */
-    public function __construct($blogModel)
+    public function __construct($BlogModel)
     {
-        $this->blogModel = $blogModel;
+        $this->BlogModel = $BlogModel;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $deletedEntry = $request->getParsedBody();
-        $dbResult = $this->blogModel->deleteEntry($deletedEntry);
+        $DeletedEntry = $request->getParsedBody();
+        $DbResult = $this->BlogModel->DeleteEntry($DeletedEntry);
         return $response->withHeader('Location', '/');
     }
 

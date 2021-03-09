@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class blogModel
+class BlogModel
 {
     private $db;
 
@@ -15,32 +15,32 @@ class blogModel
         $this->db = $db;
     }
 
-    public function getAllEntries(): bool
+    public function GetAllEntries(): bool
     {
         $query = $this->db->prepare("SELECT `*` FROM `blog-posts` WHERE deleted=0");
         $query->execute();
-        $blog = $query->fetchAll();
-        return $blog;
+        $Blog = $query->fetchAll();
+        return $Blog;
     }
 
-    public function createNewEntry($blogPost): bool
+    public function CreateNewEntry($BlogPost): bool
     {
         $query = $this->db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) VALUE (:title, :author, :date, :post)");
-        $addNewEntry = $query->execute($blogPost);
-        return $addNewEntry;
+        $AddNewEntry = $query->execute($BlogPost);
+        return $AddNewEntry;
     }
 
-    public function editEntry($editEntry): bool
+    public function EditEntry($EditEntry): bool
     {
         $query = $this->db->prepare("SELECT `title` FROM `blog-posts` UPDATE (:title, :Date, :post)");
-        $updatedEntry = $query->execute($editEntry);
-        return $updatedEntry;
+        $UpdatedEntry = $query->execute($EditEntry);
+        return $UpdatedEntry;
     }
 
-    public function deleteEntry($deleteEntry)
+    public function DeleteEntry($DeleteEntry)
     {
         $query = $this->db->prepare("SELECT `title` FROM `blog-posts` UPDATE (:deleted)");
-        $deletedEntry = $query->execute($removeEntry);
-        return $deletedEntry;
+        $DeletedEntry = $query->execute($DeleteEntry);
+        return $DeletedEntry;
     }
 }
