@@ -38,6 +38,7 @@ class CreateNewEntryController extends Controller
         $BlogPost->rule('date', 'date');
 
         if($BlogPost->validate() === true) {
+            
             $this->BlogModel->CreateNewEntry($BlogPost);
             return $response->withStatus(200);
         } else {
