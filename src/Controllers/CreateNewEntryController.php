@@ -36,10 +36,18 @@ class CreateNewEntryController extends Controller
         $BlogPost->rule('lengthMin', 'title', 1);
         $BlogPost->rule('lengthMin', 'author', 1);
         $BlogPost->rule('date', 'date');
-        if($BlogPost->validate() === true) {
 
-            $this->BlogModel->CreateNewEntry($BlogPost);
-            return $response->withStatus(200);
+        if($BlogPost->validate()) {
+
+            $result = $this->BlogModel->CreateNewEntry($BlogPost);
+
+            if ($result) {
+
+                $ResponseData['success'] = true;
+                $ResponseData['message'] = "Your post has been successfully saved!";
+                $ResponseData['data'] = $result;
+                return $this->respondWithJson($response, $ResponseData, 200);
+            }
         } else {
 
             $ResponseData['message'] = "Please fill all fields";
