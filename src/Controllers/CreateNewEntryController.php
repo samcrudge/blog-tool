@@ -36,14 +36,13 @@ class CreateNewEntryController extends Controller
         $BlogPost->rule('lengthMin', 'title', 1);
         $BlogPost->rule('lengthMin', 'author', 1);
         $BlogPost->rule('date', 'date');
-
         if($BlogPost->validate() === true) {
-            
+
             $this->BlogModel->CreateNewEntry($BlogPost);
             return $response->withStatus(200);
         } else {
-            $ResponseData['message'] = "Please fill all fields";
 
+            $ResponseData['message'] = "Please fill all fields";
             return $this->respondWithJson($response, $ResponseData, 400);
             print_r($BlogPost->errors());
         }
