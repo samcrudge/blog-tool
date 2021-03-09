@@ -22,11 +22,8 @@ class deleteEntryController extends Controller
     public function __invoke(Request $request, Response $response, array $args)
     {
         $deletedEntry = $request->getParsedBody();
-        $result = $deletedEntry['deleteEntry'];
-        if ($result == true)
-        {
-            $dbResult = $this->blogModel->deleteEntry($deletedEntry);
-        }
+        $dbResult = $this->blogModel->deleteEntry($deletedEntry);
+        return $response->withHeader('Location', '/');
     }
 
 }
