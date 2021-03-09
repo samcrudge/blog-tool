@@ -30,22 +30,21 @@ class CreateNewEntryController extends Controller
                 'data' => []
             ];
 
-        $v = new Valitron\Validator($_POST);
-        $v->rule('required', ['title', 'author', 'date', 'post']);
-        $v->rule('lengthMin', 'post', 5);
-        $v->rule('lengthMin', 'title', 1);
-        $v->rule('lengthMin', 'author', 1);
-        $v->rule('date', 'date');
+        $BlogPost = new Valitron\Validator($_POST);
+        $BlogPost->rule('required', ['title', 'author', 'date', 'post']);
+        $BlogPost->rule('lengthMin', 'post', 5);
+        $BlogPost->rule('lengthMin', 'title', 1);
+        $BlogPost->rule('lengthMin', 'author', 1);
+        $BlogPost->rule('date', 'date');
 
-        if($v->validate()) {
-            $BlogPost = $v;
+        if($BlogPost->validate()) {
             $this->BlogModel->CreateNewEntry($BlogPost);
             return $response->withStatus(200);
         } else {
             $ResponseData['message'] = "Please fill all fields";
 
             return $this->respondWithJson($response, $ResponseData, 400);
-            print_r($v->errors());
+            print_r($BlogPost->errors());
         }
     }
 
