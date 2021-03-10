@@ -23,13 +23,21 @@ class CreateNewEntryController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $AddNewEntry = $request->getParsedBody();
-        $result = $AddNewEntry['NewBlogEntry'];
-        if ($result === true)
+        $ResponseData =
+            [
+                'success' => false,
+                'message' => '',
+                'data' => []
+            ];
+
+        $AddNewEntry = $request->getParsedBody()['NewBlogEntry'] ?? null;
+
+        if (!$AddNewEntry)
         {
-            $DbResult = $this->BlogModel->createNewEntry($AddNewEntry);
+            $ResponseData['message'] = "Please fill all fields";
+
+            return $this->respondWithJson($response, $ResponseData, 500);
         }
-        return $response->withHeader('location', '/');
     }
 
 }
