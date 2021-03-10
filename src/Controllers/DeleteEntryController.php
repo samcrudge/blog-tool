@@ -21,9 +21,33 @@ class DeleteEntryController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $DeletedEntry = $request->getParsedBody();
-        $DbResult = $this->BlogModel->DeleteEntry($DeletedEntry);
-        return $response->withHeader('Location', '/');
+        $ResponseData =
+            [
+                'success' => false,
+                'message' => '',
+                'data' => []
+            ];
+
+        $BlogPost = new Valitron\Validator($_POST);
+        $BlogPost->rule('required', ['GUID']);
+
+        if ($BlogPost->validate()) {
+            $Result = $this->BlogModel->DeleteEntry($DeletedEntry);
+            if ($Result) {
+                $ResponseData['success'] = true;
+                $ResponseData['message'] = "Your post has been successfully deleted!";
+                $ResponseData['data'] = $Result;
+                return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 200);
+            } else {
+
+                $ResponseData['success'];
+                $ResponseData['message'] = "Database cannot complete this task to ".$Result.".";
+
+                print_r($BlogPost->errors());
+                return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 500);
+            }
+        }
+
     }
 
 }

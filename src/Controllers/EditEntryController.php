@@ -21,9 +21,36 @@ class EditEntryController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $EditEntry = $request->getParsedBody();
-        $DbResult = $this->BlogModel->editEntry($EditEntry);
-        return $response->withHeader('location', '/');
+        $ResponseData =
+            [
+                'success' => false,
+                'message' => '',
+                'data' => []
+            ];
+
+        $BlogPost = new Valitron\Validator($_POST);
+        $BlogPost->rule('required', ['GUID']);
+
+        if($BlogPost->validate()) {
+
+            $Result = $this->BlogModel->EditEntry($BlogPost);
+
+            if ($Result) {
+
+                $ResponseData['success'] = true;
+                $ResponseData['message'] = "Your post has been successfully saved!";
+                $ResponseData['data'] = $Result;
+                return $this->respondWithJson($response, $ResponseData, 200);
+            }
+        } else {
+
+            $ResponseData['success'];
+            $ResponseData['message'] = "Please fill all fields";
+            $ResponseData['data'] = $BlogPost;
+
+            print_r($BlogPost->errors());
+            return $this->respondWithJson($response, $ResponseData, 500);
+        }
     }
 
 }
