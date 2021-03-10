@@ -9,10 +9,10 @@ class AllEntriesControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $BlogModel = $container->get('BlogModel');
+        $blogModel = $container->get('blogModel');
         $renderer = $container->get('renderer');
-        $BlogModelPageController = new AllEntriesController($BlogModel, $renderer);
-        return $BlogModelPageController;
+        $blogModelPageController = new AllEntriesController($blogModel, $renderer);
+        return $blogModelPageController;
     }
 
 }

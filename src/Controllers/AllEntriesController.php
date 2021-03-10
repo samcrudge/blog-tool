@@ -9,25 +9,25 @@ use Slim\Views\PhpRenderer;
 
 class AllEntriesController extends Controller
 {
-    private $BlogModel;
-    private $Renderer;
+    private $blogModel;
+    private $benderer;
 
     /**
      * AllEntriesController constructor.
-     * @param $BlogModel
-     * @param $Renderer
+     * @param $blogModel
+     * @param $renderer
      */
-    public function __construct($BlogModel, PhpRenderer $Renderer)
+    public function __construct($blogModel, PhpRenderer $renderer)
     {
-        $this->BlogModel = $BlogModel;
-        $this->Renderer = $Renderer;
+        $this->BlogModel = $blogModel;
+        $this->Renderer = $renderer;
     }
 
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $Data = ['AllBlogs'] = $this->BlogModel->GetAllEntries();
-        return $this->Renderer->render($response, '/', $Data);
+        $Data = ['AllBlogs'] = $this->blogModel->GetAllEntries();
+        return $this->renderer->render($response, '/', $Data);
     }
 
 

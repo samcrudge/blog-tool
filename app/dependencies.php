@@ -33,7 +33,7 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
-    $container['Db'] = new \App\Db\DbConnection();
+    $container['db'] = new \App\Db\DbConnection();
 
     $container['BlogModel'] = DI\factory('App\Factories\BlogModelFactory');
     $container['AllEntriesController'] = DI\factory('App\Factories\AllEntriesController');

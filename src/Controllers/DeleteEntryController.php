@@ -8,43 +8,43 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DeleteEntryController extends Controller
 {
-    private $BlogModel;
+    private $blogModel;
 
     /**
      * deleteEntryController constructor.
-     * @param $BlogModel
+     * @param $blogModel
      */
-    public function __construct($BlogModel)
+    public function __construct($blogModel)
     {
-        $this->BlogModel = $BlogModel;
+        $this->blogModel = $blogModel;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $ResponseData =
+        $responseData =
             [
                 'success' => false,
                 'message' => '',
                 'data' => []
             ];
 
-        $BlogPost = new Valitron\Validator($_POST);
-        $BlogPost->rule('required', ['GUID']);
+        $blogPost = new Valitron\Validator($_POST);
+        $blogPost->rule('required', ['GUID']);
 
-        if ($BlogPost->validate()) {
-            $Result = $this->BlogModel->DeleteEntry($DeletedEntry);
-            if ($Result) {
+        if ($blogPost->validate()) {
+            $result = $this->blogModel->DeleteEntry($deletedEntry);
+            if ($result) {
                 $ResponseData['success'] = true;
                 $ResponseData['message'] = "Your post has been successfully deleted!";
                 $ResponseData['data'] = $Result;
-                return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 200);
+                return $this->respondWithJson($response->withHeader('Location', '/'), $responseData, 200);
             } else {
 
-                $ResponseData['success'];
-                $ResponseData['message'] = "Database cannot complete this task to ".$Result.".";
+                $responseData['success'];
+                $responseData['message'] = "Database cannot complete this task to ".$result.".";
 
-                print_r($BlogPost->errors());
-                return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 500);
+                print_r($blogPost->errors());
+                return $this->respondWithJson($response->withHeader('Location', '/'), $responseData, 500);
             }
         }
 

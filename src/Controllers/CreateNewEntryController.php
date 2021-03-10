@@ -10,52 +10,52 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class CreateNewEntryController extends Controller
 {
-    private $BlogModel;
+    private $blogModel;
 
     /**
      * CreateNewEntryController constructor.
-     * @param $BlogModel
+     * @param $blogModel
      */
-    public function __construct($BlogModel)
+    public function __construct($blogModel)
     {
-        $this->BlogModel = $BlogModel;
+        $this->blogModel = $blogModel;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $ResponseData =
+        $responseData =
             [
                 'success' => false,
                 'message' => '',
                 'data' => []
             ];
 
-        $BlogPost = new Valitron\Validator($_POST);
-        $BlogPost->rule('required', ['title', 'author', 'date', 'post']);
-        $BlogPost->rule('lengthMin', 'post', 5);
-        $BlogPost->rule('lengthMin', 'title', 1);
-        $BlogPost->rule('lengthMin', 'author', 1);
-        $BlogPost->rule('date', 'date');
+        $blogPost = new Valitron\Validator($_POST);
+        $blogPost->rule('required', ['title', 'author', 'date', 'post']);
+        $blogPost->rule('lengthMin', 'post', 5);
+        $blogPost->rule('lengthMin', 'title', 1);
+        $blogPost->rule('lengthMin', 'author', 1);
+        $blogPost->rule('date', 'date');
 
-        if($BlogPost->validate()) {
+        if($blogPost->validate()) {
 
-            $Result = $this->BlogModel->CreateNewEntry($BlogPost);
+            $result = $this->blogModel->CreateNewEntry($blogPost);
 
-            if ($Result) {
+            if ($result) {
 
-                $ResponseData['success'] = true;
-                $ResponseData['message'] = "Your post has been successfully saved!";
-                $ResponseData['data'] = $Result;
-                return $this->respondWithJson($response, $ResponseData, 200);
+                $responseData['success'] = true;
+                $responseData['message'] = "Your post has been successfully saved!";
+                $responseData['data'] = $result;
+                return $this->respondWithJson($response, $responseData, 200);
             }
         } else {
 
-            $ResponseData['success'];
-            $ResponseData['message'] = "Please fill all fields";
-            $ResponseData['data'] = $BlogPost;
+            $responseData['success'];
+            $responseData['message'] = "Please fill all fields";
+            $responseData['data'] = $blogPost;
 
-            print_r($BlogPost->errors());
-            return $this->respondWithJson($response, $ResponseData, 500);
+            print_r($blogPost->errors());
+            return $this->respondWithJson($response, $responseData, 500);
         }
     }
 
