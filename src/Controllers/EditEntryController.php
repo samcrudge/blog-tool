@@ -21,9 +21,31 @@ class EditEntryController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
+        $ResponseData =
+            [
+                'success' => false,
+                'message' => '',
+                'data' => []
+            ];
+
         $EditEntry = $request->getParsedBody();
-        $DbResult = $this->BlogModel->editEntry($EditEntry);
-        return $response->withHeader('location', '/');
+        $Result = $this->BlogModel->editEntry($EditEntry);
+
+        if ($Result)
+        {
+            $ResponseData['success'] = true;
+            $ResponseData['message'] = "Your post has been successfully edited!";
+            $ResponseData['data'] = $Result;
+            return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 200);
+        } else {
+
+            $ResponseData['success'];
+            $ResponseData['message'] = "Database cannot complete this task";
+            $ResponseData['data'] = $Result;
+
+            return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 500);
+            print_r($BlogPost->errors());
+        }
     }
 
 }

@@ -25,21 +25,21 @@ class BlogModel
 
     public function CreateNewEntry($BlogPost): bool
     {
-        $query = $this->db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) VALUE (:title, :author, :date, :post)");
+        $query = $this->db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) VALUE (:title, :author, :date, :post, :GUID)");
         $AddNewEntry = $query->execute($BlogPost);
         return $AddNewEntry;
     }
 
     public function EditEntry($EditEntry): bool
     {
-        $query = $this->db->prepare("SELECT `title` FROM `blog-posts` UPDATE (:title, :Date, :post)");
+        $query = $this->db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:title, :Date, :post)");
         $UpdatedEntry = $query->execute($EditEntry);
         return $UpdatedEntry;
     }
 
     public function DeleteEntry($DeleteEntry)
     {
-        $query = $this->db->prepare("SELECT `title` FROM `blog-posts` UPDATE (:deleted)");
+        $query = $this->db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)");
         $DeletedEntry = $query->execute($DeleteEntry);
         return $DeletedEntry;
     }
