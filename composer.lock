@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a869d5a4186825447b566c57d5dbeac",
+    "content-hash": "aca2235d23cd01b25e2b7e22b75b56b5",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -971,9 +971,6 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2020-12-01T19:41:22+00:00"
-=======
             "description": "Symfony utilities for portability of PHP codes",
             "homepage": "https://symfony.com",
             "keywords": [
@@ -1042,7 +1039,6 @@
                 }
             ],
             "time": "2020-12-01T11:14:45+00:00"
->>>>>>> origin/master
         }
     ],
     "packages-dev": [
@@ -2684,9 +2680,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-<<<<<<< HEAD
-    "plugin-api-version": "1.1.0"
-=======
     "plugin-api-version": "2.0.0"
->>>>>>> origin/master
 }
