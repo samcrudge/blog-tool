@@ -2,6 +2,7 @@
 
 namespace App\Factories;
 
+use App\Controllers\BlogModelPageController;
 use Psr\Container\ContainerInterface;
 
 class BlogModelPageControllerFactory
@@ -10,7 +11,7 @@ class BlogModelPageControllerFactory
     {
         $BlogModel = $container->get('BlogModel');
         $renderer = $container->get('renderer');
-        $BlogModelPageController = new BlogModelPageControllerFactory($BlogModel, $renderer);
+        $BlogModelPageController = new BlogModelPageController($BlogModel, $renderer);
         return $BlogModelPageController;
     }
 
