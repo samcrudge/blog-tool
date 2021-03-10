@@ -11,7 +11,7 @@ class BlogModelFactory
     public function __invoke(ContainerInterface $container)
     {
         $Db = $container->get('db')->DbConnection();
-        $BlogModel = new BlogModel($db);
+        $BlogModel = new BlogModel($Db);
         return $BlogModel;
     }
 
