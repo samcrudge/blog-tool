@@ -11,4 +11,5 @@ return function (App $app) {
         $renderer = $container->get('renderer');
         return $renderer->render($response, "index.php", $args);
     });
+
  };
