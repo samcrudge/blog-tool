@@ -4,15 +4,15 @@ namespace App\Models;
 
 class BlogModel
 {
-    private $db;
+    private $Db;
 
     /**
      * blogModel constructor.
-     * @param $db
+     * @param $Db
      */
-    public function __construct($db)
+    public function __construct($Db)
     {
-        $this->db = $db;
+        $this->Db = $Db;
     }
 
 
@@ -22,7 +22,7 @@ class BlogModel
      */
     public function GetAllEntries(): bool
     {
-        $query = $this->db->prepare("SELECT `*` FROM `blog-posts` WHERE deleted=0");
+        $query = $this->Db->prepare("SELECT `*` FROM `blog-posts` WHERE deleted=0");
         $query->execute();
         $Blog = $query->fetchAll();
         return $Blog;
@@ -34,7 +34,7 @@ class BlogModel
      */
     public function CreateNewEntry($BlogPost): bool
     {
-        $query = $this->db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) VALUE (:title, :author, :date, :post, :GUID)");
+        $query = $this->Db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) VALUE (:title, :author, :date, :post, :GUID)");
         $AddNewEntry = $query->execute($BlogPost);
         return $AddNewEntry;
     }
@@ -46,7 +46,7 @@ class BlogModel
      */
     public function EditEntry($EditEntry): bool
     {
-        $query = $this->db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:title, :Date, :post)");
+        $query = $this->Db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:title, :Date, :post)");
         $UpdatedEntry = $query->execute($EditEntry);
         return $UpdatedEntry;
     }
@@ -58,7 +58,7 @@ class BlogModel
      */
     public function DeleteEntry($DeleteEntry)
     {
-        $query = $this->db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)");
+        $query = $this->Db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)");
         $DeletedEntry = $query->execute($DeleteEntry);
         return $DeletedEntry;
     }

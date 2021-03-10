@@ -7,13 +7,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\PhpRenderer;
 
-class BlogModelPageController extends Controller
+class AllEntriesController extends Controller
 {
     private $BlogModel;
     private $Renderer;
 
     /**
-     * BlogModelPageController constructor.
+     * AllEntriesController constructor.
      * @param $BlogModel
      * @param $Renderer
      */
