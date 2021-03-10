@@ -4,13 +4,13 @@ namespace App\Factories;
 
 use Psr\Container\ContainerInterface;
 
-class Factory
+class BlogModelPageControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
         $BlogModel = $container->get('BlogModel');
         $renderer = $container->get('renderer');
-        $BlogModelPageController = new Factory($BlogModel, $renderer);
+        $BlogModelPageController = new BlogModelPageControllerFactory($BlogModel, $renderer);
         return $BlogModelPageController;
     }
 
