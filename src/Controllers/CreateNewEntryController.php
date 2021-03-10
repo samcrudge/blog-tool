@@ -54,7 +54,6 @@ class CreateNewEntryController extends Controller
             $responseData['message'] = "Please fill all fields";
             $responseData['data'] = $blogPost;
 
-            print_r($blogPost->errors());
             return $this->respondWithJson($response, $responseData, 500);
         }
     }

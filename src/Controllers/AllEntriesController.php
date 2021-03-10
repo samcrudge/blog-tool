@@ -26,8 +26,23 @@ class AllEntriesController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
+        $responseData =
+            [
+                'success' => false,
+                'message' => '',
+                'data' => []
+            ];
+
         $Data = ['AllBlogs'] = $this->blogModel->GetAllEntries();
-        return $this->renderer->render($response, '/', $Data);
+
+        if($Data){
+            return $this->renderer->render($response, '/', $Data);
+        } else {
+            $responseData['success'];
+            $responseData['No blog posts available.'];
+            return $this->respondWithJson($response, $responseData, 500);
+        }
+
     }
 
 

@@ -43,7 +43,6 @@ class DeleteEntryController extends Controller
                 $responseData['success'];
                 $responseData['message'] = "Database cannot complete this task to ".$result.".";
 
-                print_r($blogPost->errors());
                 return $this->respondWithJson($response->withHeader('Location', '/'), $responseData, 500);
             }
         }
