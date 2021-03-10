@@ -4,9 +4,9 @@ namespace app\Db;
 
 use PDO;
 
-class dbConnection
+class DbConnection
 {
-    public function dbConnection()
+    public function DbConnection()
     {
         return new PDO('mysql:host=127.0.0.1;dbname=blog-posts', 'root', 'password');
     }
