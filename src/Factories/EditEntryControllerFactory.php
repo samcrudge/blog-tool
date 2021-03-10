@@ -9,9 +9,9 @@ class EditEntryControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $BlogModel = $container->get('BlogModel');
-        $EditEntryController = new EditEntryController($BlogModel);
-        return $EditEntryController;
+        $blogModel = $container->get('blogModel');
+        $editEntryController = new EditEntryController($blogModel);
+        return $editEntryController;
     }
 
 }

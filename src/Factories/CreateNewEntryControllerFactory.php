@@ -9,9 +9,9 @@ class CreateNewEntryControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $BlogModel = $container->get('BlogModel');
-        $CreateNewEntryController = new CreateNewEntryController($BlogModel);
-        return $CreateNewEntryController;
+        $blogModel = $container->get('blogModel');
+        $createNewEntryController = new CreateNewEntryController($blogModel);
+        return $createNewEntryController;
     }
 
 }
