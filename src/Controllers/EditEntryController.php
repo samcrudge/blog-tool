@@ -28,23 +28,28 @@ class EditEntryController extends Controller
                 'data' => []
             ];
 
-        $EditEntry = $request->getParsedBody();
-        $Result = $this->BlogModel->editEntry($EditEntry);
+        $BlogPost = new Valitron\Validator($_POST);
+        $BlogPost->rule('required', ['GUID']);
 
-        if ($Result)
-        {
-            $ResponseData['success'] = true;
-            $ResponseData['message'] = "Your post has been successfully edited!";
-            $ResponseData['data'] = $Result;
-            return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 200);
+        if($BlogPost->validate()) {
+
+            $Result = $this->BlogModel->EditEntry($BlogPost);
+
+            if ($Result) {
+
+                $ResponseData['success'] = true;
+                $ResponseData['message'] = "Your post has been successfully saved!";
+                $ResponseData['data'] = $Result;
+                return $this->respondWithJson($response, $ResponseData, 200);
+            }
         } else {
 
             $ResponseData['success'];
-            $ResponseData['message'] = "Database cannot complete this task";
-            $ResponseData['data'] = $Result;
+            $ResponseData['message'] = "Please fill all fields";
+            $ResponseData['data'] = $BlogPost;
 
-            return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 500);
             print_r($BlogPost->errors());
+            return $this->respondWithJson($response, $ResponseData, 500);
         }
     }
 

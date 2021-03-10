@@ -29,9 +29,10 @@ class DeleteEntryController extends Controller
             ];
 
         $BlogPost = new Valitron\Validator($_POST);
-        $BlogPost->rule('required', ['title', 'author', 'date', 'post']);
+        $BlogPost->rule('required', ['GUID']);
+
         if ($BlogPost->validate()) {
-            $BlogPost = $this->BlogModel->DeleteEntry($DeletedEntry);
+            $Result = $this->BlogModel->DeleteEntry($DeletedEntry);
             if ($Result) {
                 $ResponseData['success'] = true;
                 $ResponseData['message'] = "Your post has been successfully deleted!";
@@ -40,11 +41,10 @@ class DeleteEntryController extends Controller
             } else {
 
                 $ResponseData['success'];
-                $ResponseData['message'] = "Database cannot complete this task";
-                $ResponseData['data'] = $Result;
+                $ResponseData['message'] = "Database cannot complete this task to ".$Result.".";
 
-                return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 500);
                 print_r($BlogPost->errors());
+                return $this->respondWithJson($response->withHeader('Location', '/'), $ResponseData, 500);
             }
         }
 
