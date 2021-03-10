@@ -10,7 +10,7 @@ use Slim\Views\PhpRenderer;
 class AllEntriesController extends Controller
 {
     private $blogModel;
-    private $benderer;
+    private $renderer;
 
     /**
      * AllEntriesController constructor.
@@ -33,10 +33,10 @@ class AllEntriesController extends Controller
                 'data' => []
             ];
 
-        $Data = ['AllBlogs'] = $this->blogModel->GetAllEntries();
+        $data = ['AllBlogs'] = $this->blogModel->GetAllEntries();
 
-        if($Data){
-            return $this->renderer->render($response, '/', $Data);
+        if($data){
+            return $this->renderer->render($response, '/', $data);
         } else {
             $responseData['success'];
             $responseData['No blog posts available.'];

@@ -32,11 +32,11 @@ class DeleteEntryController extends Controller
         $blogPost->rule('required', ['GUID']);
 
         if ($blogPost->validate()) {
-            $result = $this->blogModel->DeleteEntry($deletedEntry);
+            $result = $this->blogModel->DeleteEntry($blogPost);
             if ($result) {
                 $ResponseData['success'] = true;
                 $ResponseData['message'] = "Your post has been successfully deleted!";
-                $ResponseData['data'] = $Result;
+                $ResponseData['data'] = $result;
                 return $this->respondWithJson($response->withHeader('Location', '/'), $responseData, 200);
             } else {
 

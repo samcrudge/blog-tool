@@ -29,7 +29,11 @@ class EditEntryController extends Controller
             ];
 
         $blogPost = new Valitron\Validator($_POST);
-        $blogPost->rule('required', ['GUID']);
+        $blogPost->rule('required', ['title', 'author', 'date', 'post', 'GUID']);
+        $blogPost->rule('lengthMin', 'post', 5);
+        $blogPost->rule('lengthMin', 'title', 1);
+        $blogPost->rule('lengthMin', 'author', 1);
+        $blogPost->rule('date', 'date');
 
         if($blogPost->validate()) {
 
