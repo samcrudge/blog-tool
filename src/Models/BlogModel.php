@@ -15,17 +15,11 @@ class BlogModel
         $this->db = $db;
     }
 
-
-    /**
-     * @return bool
-     * collect all fields where not deleted.
-     */
-    public function GetAllEntries(): bool
+    public function GetAllEntries()
     {
-        $query = $this->db->prepare("SELECT `*` FROM `blog-posts` WHERE deleted=0");
-        $query->execute();
-        $blog = $query->fetchAll();
-        return $blog;
+        $query = $this->db->query("SELECT `*` FROM `blog-posts` WHERE `deleted` = 0;");
+         return $query = $query->fetchAll();
+
     }
 
     /**
