@@ -29,8 +29,7 @@ class AllEntriesController extends Controller
         $responseData =
             [
                 'success' => false,
-                'message' => '',
-                'data' => []
+                'message' => ''
             ];
 
         $data = ['AllBlogs'] = $this->blogModel->GetAllEntries();
