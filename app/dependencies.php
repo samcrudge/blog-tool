@@ -33,10 +33,10 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
-    $container['db'] = new \App\Db\DbConnection();
+    $container['db'] = new App\Db\DbConnection();
 
     $container['BlogModel'] = DI\factory('App\Factories\BlogModelFactory');
-    $container['AllEntriesController'] = DI\factory('App\Factories\AllEntriesController');
+    $container['AllEntriesController'] = DI\factory('App\Factories\AllEntriesControllerFactory');
     $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryController');
     $container['EditEntryController'] = DI\factory('App\Factories\EditEntryController');
     $container['DeleteNewEntryController'] = DI\factory('App\Factories\DeleteNewEntryController');

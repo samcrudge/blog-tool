@@ -19,8 +19,8 @@ class AllEntriesController extends Controller
      */
     public function __construct($blogModel, PhpRenderer $renderer)
     {
-        $this->BlogModel = $blogModel;
-        $this->Renderer = $renderer;
+        $this->blogModel = $blogModel;
+        $this->renderer = $renderer;
     }
 
 
@@ -32,13 +32,12 @@ class AllEntriesController extends Controller
                 'message' => ''
             ];
 
-        $data = ['AllBlogs'] = $this->blogModel->GetAllEntries();
+        $blogData = $this->blogModel->GetAllEntries();
 
-        if($data){
-            return $this->renderer->render($response, '/', $data);
+        if($blogData){
+            return $this->respondWithJson($response, $blogData, 200);
         } else {
-            $responseData['success'];
-            $responseData['No blog posts available.'];
+            $responseData['message'] = 'Problem with DB';
             return $this->respondWithJson($response, $responseData, 500);
         }
 
