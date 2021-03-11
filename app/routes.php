@@ -12,10 +12,9 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
-};
-
     $app->get('/all', 'AllEntriesController');
     $app->post('/create', 'CreateNewEntryController');
     $app->post('/edit', 'EditEntryController');
     $app->post('/delete', 'DeleteEntryController');
- };
+
+};
