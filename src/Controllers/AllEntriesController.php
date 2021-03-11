@@ -35,8 +35,10 @@ class AllEntriesController extends Controller
         $blogData = $this->blogModel->GetAllEntries();
 
         if($blogData){
+
             return $this->respondWithJson($response, $blogData, 200);
         } else {
+
             $responseData['message'] = 'Problem with DB';
             return $this->respondWithJson($response, $responseData, 500);
         }
