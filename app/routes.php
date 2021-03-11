@@ -17,4 +17,5 @@ return function (App $app) {
     $app->post('/edit', 'EditEntryController');
     $app->post('/delete', 'DeleteEntryController');
 
+
 };
