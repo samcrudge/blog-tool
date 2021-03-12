@@ -28,7 +28,6 @@ class AllEntriesController extends Controller
     {
         $responseData =
             [
-                'success' => false,
                 'message' => ''
             ];
 

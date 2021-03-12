@@ -7,11 +7,13 @@ use Psr\Container\ContainerInterface;
 
 class CreateNewEntryControllerFactory
 {
+
     public function __invoke(ContainerInterface $container)
     {
-        $blogModel = $container->get('blogModel');
-        $createNewEntryController = new CreateNewEntryController($blogModel);
-        return $createNewEntryController;
+
+        $blogModel = $container->get('BlogModel');
+        return $createNewEntryController = new CreateNewEntryController($blogModel);
+
     }
 
 }

@@ -12,8 +12,13 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
+    #working
     $app->get('/all', 'AllEntriesController');
+
+    #working on
     $app->post('/create', 'CreateNewEntryController');
+
+    #ToDo
     $app->post('/edit', 'EditEntryController');
     $app->post('/delete', 'DeleteEntryController');
 

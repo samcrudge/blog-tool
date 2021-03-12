@@ -9,7 +9,7 @@ class EditEntryControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $blogModel = $container->get('blogModel');
+        $blogModel = $container->get('BlogModel');
         $editEntryController = new EditEntryController($blogModel);
         return $editEntryController;
     }
