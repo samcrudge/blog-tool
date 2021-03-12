@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aca2235d23cd01b25e2b7e22b75b56b5",
+    "content-hash": "bccafede6f48c74ae45e2b5d96db3684",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -953,13 +953,13 @@
                     "homepage": "http://gabrielmanricks.com"
                 }
             ],
-            "description": "Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
-            "homepage": "https://www.slimframework.com",
+            "description": "Symfony utilities for portability of PHP codes",
+            "homepage": "https://symfony.com",
             "keywords": [
-                "api",
-                "framework",
-                "micro",
-                "router"
+                "compat",
+                "compatibility",
+                "polyfill",
+                "shim"
             ],
             "funding": [
                 {
@@ -970,14 +970,6 @@
                     "url": "https://tidelift.com/funding/github/packagist/slim/slim",
                     "type": "tidelift"
                 }
-            ],
-            "description": "Symfony utilities for portability of PHP codes",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compat",
-                "compatibility",
-                "polyfill",
-                "shim"
             ],
             "time": "2019-11-27T13:56:44+00:00"
         },

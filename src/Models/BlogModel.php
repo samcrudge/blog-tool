@@ -27,9 +27,6 @@ class BlogModel
 
     public function CreateNewEntry($blogPost): bool
     {
-        $post = [
-
-        ];
         $query = $this->db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) 
                                         VALUE (:title, :author, :date, :post)");
         $addNewEntry = $query->execute($blogPost);

@@ -16,7 +16,7 @@ return function (App $app) {
     $app->get('/all', 'AllEntriesController');
 
     #working on
-    $app->post('/create', 'CreateNewEntryController');
+    $app->post('/new', 'CreateNewEntryController');
 
     #ToDo
     $app->post('/edit', 'EditEntryController');

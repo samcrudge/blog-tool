@@ -50,7 +50,7 @@ class CreateNewEntryController extends Controller
             $responseData['data'] = $result;
             return $this->respondWithJson($response, $responseData, 200);
         } else {
-            return $response;
+            return http_send_status(500);
         }
 
     }
