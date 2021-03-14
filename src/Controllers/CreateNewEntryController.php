@@ -23,7 +23,7 @@ class CreateNewEntryController extends Controller
         $this->blogModel = $blogModel;
     }
 
-    public function __invoke(Request $request, Response $response, array $args)
+    public function __invoke(Request $request, Response $response, array $args): Response
     {
         $responseData =
             [
@@ -35,7 +35,7 @@ class CreateNewEntryController extends Controller
         $blogPost = new Valitron\Validator($_POST);
 
         try {
-            Validators::validateEdit($blogPost);
+            Validators::ValidateNewPost($blogPost);
         } catch (throwable $e) {
             $responseData['success'];
             $responseData['message'] = $e->getMessage();
@@ -43,16 +43,16 @@ class CreateNewEntryController extends Controller
             return $this->respondWithJson($response, $responseData, 500);
         }
         $result = $this->blogModel->CreateNewEntry($blogPost);
-        if ($result) {
-
-            $responseData['success'] = true;
-            $responseData['message'] = "Your post has been successfully saved!";
-            $responseData['data'] = $result;
+        $responseData['success'] = true;
+        $responseData['message'] = "Your post has been successfully saved!";
+        $responseData['data'] = $result;
+        try {
             return $this->respondWithJson($response, $responseData, 200);
-        } else {
-            return http_send_status(500);
+        } catch (\Exception $e) {
+            $responseData['success'];
+            $responseData['message'] = $e->getMessage();
+
+            return $this->respondWithJson($response, $responseData, 500);
         }
-
     }
-
 }

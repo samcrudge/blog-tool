@@ -1,5 +1,6 @@
 <?php
 
+set XDEBUG_SESSION=1
 namespace App\Models;
 
 class BlogModel
@@ -25,11 +26,16 @@ class BlogModel
     }
 
 
-    public function CreateNewEntry($blogPost): bool
+    public function CreateNewEntry($blogPost, $db): bool
     {
-        $query = $this->db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) 
+        $query = $db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) 
                                         VALUE (:title, :author, :date, :post)");
-        $addNewEntry = $query->execute($blogPost);
+        $addNewEntry = $query->execute([
+            ":title" => $blogPost["title"],
+            ":author" => $blogPost["author"],
+            ":date" => $blogPost["date"],
+            ":post" => $blogPost["post"]
+            ]);
         return $addNewEntry;
     }
 
