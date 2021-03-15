@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Interfaces\BlogModelInterface;
 
-
 class BlogModel implements BlogModelInterface
 {
 
@@ -16,9 +15,7 @@ class BlogModel implements BlogModelInterface
      */
     public function __construct($db)
     {
-
         $this->db = $db;
-
     }
 
     public function CreateNewEntry($blogPost): bool
@@ -26,7 +23,6 @@ class BlogModel implements BlogModelInterface
         $query = $this->db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`)
                                         VALUES (:title , :author, :date, :post)');
         return $queryCheck = $query->execute($blogPost);
-
     }
 
     public function ReadAllEntries(): array
@@ -35,7 +31,6 @@ class BlogModel implements BlogModelInterface
                                     FROM `blog-posts` 
                                     WHERE `deleted` = 0;');
          return $query = $query->fetchAll();
-
     }
 
     public function UpdateEntry($editEntry): bool
@@ -46,7 +41,6 @@ class BlogModel implements BlogModelInterface
                                             `post` = :post 
                                         WHERE `GUID` = :GUID;');
         return $updatedEntry = $query->execute($editEntry);
-
     }
 
     public function DeleteEntry($deleteEntry): bool
@@ -55,7 +49,5 @@ class BlogModel implements BlogModelInterface
                                         set `deleted` = 1 
                                         WHERE `GUID` = :GUID;');
         return $deleteEntry = $query->execute($deleteEntry);
-
     }
-
 }

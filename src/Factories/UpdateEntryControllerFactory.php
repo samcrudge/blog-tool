@@ -9,10 +9,7 @@ class UpdateEntryControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-
         $blogModel = $container->get('BlogModelInstanceInterface');
         return $updateEntryController = new UpdateEntryController($blogModel);
-
     }
-
 }

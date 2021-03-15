@@ -9,11 +9,8 @@ class ReadEntriesControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-
         $blogModel = $container->get('BlogModelInstanceInterface');
         $renderer = $container->get('renderer');
         return $readEntriesController = new ReadEntriesController($blogModel, $renderer);
-
     }
-
 }

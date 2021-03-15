@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Abstracts\Controller;
 use App\Interfaces\BlogModelInstanceInterface;
 use App\Validators\Validators;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -35,23 +34,19 @@ class UpdateEntryController extends Controllerv implements BlogModelInstanceInte
         $blogPost = new Validator($updatedBlogPost);
 
         if (!Validators::ValidateUpdate($blogPost)) {
-
             $responseData['success'];
             $responseData['message'] = 'Your post does not meet requirements';
             $responseData['data'] = $blogPost->errors();
             return $this->respondWithJson($response, $responseData, 500);
-
         }
 
         $dbExchange = $this->blogModel->UpdateEntry($updatedBlogPost);
 
         if ($dbExchange) {
-
             $responseData['success'] = true;
             $responseData['message'] = "Your post has been successfully saved!";
             $responseData['data'] = $updatedBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
-
         }
 
         $responseData['success'];
@@ -60,5 +55,4 @@ class UpdateEntryController extends Controllerv implements BlogModelInstanceInte
 
         return $this->respondWithJson($response, $responseData, 500);
     }
-
 }
