@@ -1,6 +1,5 @@
 <?php
 
-set XDEBUG_SESSION=1
 namespace App\Models;
 
 class BlogModel
@@ -18,9 +17,9 @@ class BlogModel
 
     public function GetAllEntries(): array
     {
-        $query = $this->db->query("SELECT `title`, `author`, `date`, `post`, `GUID`
+        $query = $this->db->query('SELECT `title`, `author`, `date`, `post`, `GUID`
                                     FROM `blog-posts` 
-                                    WHERE `deleted` = 0;");
+                                    WHERE `deleted` = 0;');
          return $query = $query->fetchAll();
 
     }
@@ -28,13 +27,13 @@ class BlogModel
 
     public function CreateNewEntry($blogPost, $db): bool
     {
-        $query = $db->prepare("INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) 
-                                        VALUE (:title, :author, :date, :post)");
+        $query = $db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) 
+                                        VALUE (:title, :author, :date, :post)');
         $addNewEntry = $query->execute([
-            ":title" => $blogPost["title"],
-            ":author" => $blogPost["author"],
-            ":date" => $blogPost["date"],
-            ":post" => $blogPost["post"]
+            ':title' => $blogPost['title'],
+            ':author' => $blogPost['author'],
+            ':date' => $blogPost['date'],
+            ':post' => $blogPost['post']
             ]);
         return $addNewEntry;
     }
@@ -42,8 +41,8 @@ class BlogModel
 
     public function EditEntry($editEntry): bool
     {
-        $query = $this->db->prepare("SELECT `GUID` FROM `blog-posts` 
-                                        UPDATE (:title, :Date, :post)");
+        $query = $this->db->prepare('SELECT `GUID` FROM `blog-posts` 
+                                        UPDATE (:title, :Date, :post)');
         $updatedEntry = $query->execute($editEntry);
         return $updatedEntry;
     }
@@ -55,7 +54,7 @@ class BlogModel
      */
     public function DeleteEntry($deleteEntry): bool
     {
-        $query = $this->db->prepare("SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)");
+        $query = $this->db->prepare('SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)');
         $deletedEntry = $query->execute($deleteEntry);
         return $deletedEntry;
     }

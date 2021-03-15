@@ -44,7 +44,7 @@ class CreateNewEntryController extends Controller
         }
         $result = $this->blogModel->CreateNewEntry($blogPost);
         $responseData['success'] = true;
-        $responseData['message'] = "Your post has been successfully saved!";
+        $responseData['message'] = 'Your post has been successfully saved!';
         $responseData['data'] = $result;
         try {
             return $this->respondWithJson($response, $responseData, 200);

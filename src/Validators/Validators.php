@@ -2,12 +2,11 @@
 
 namespace App\Validators;
 
-
-
+use Exception;
 
 class Validators {
 
-    private static function ValidateEdit($unvalidated) {
+    public static function ValidateEdit($unvalidated) {
         $unvalidated->rule('required', ['title', 'author', 'date', 'post', 'GUID']);
         $unvalidated->rule('lengthMin', 'post', 5);
         $unvalidated->rule('lengthMin', 'title', 1);
@@ -18,7 +17,7 @@ class Validators {
         {
             return $unvalidated;
         } else {
-            throw new \Exception('Please ensure all required fields are filled.');
+            throw new Exception('Please ensure all required fields are filled.');
         }
     }
 
