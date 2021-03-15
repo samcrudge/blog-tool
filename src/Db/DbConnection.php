@@ -5,7 +5,7 @@ namespace App\Db;
 use App\Interfaces\DbConnectInterface;
 use PDO;
 
-class DbConnectionInterface implements DbConnectInterface
+class DbConnection implements DbConnectInterface
 {
     public function DbConnection(): \PDO
     {

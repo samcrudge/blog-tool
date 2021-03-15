@@ -2,7 +2,7 @@
 
 namespace App\Factories;
 
-use App\Db\DbConnectionInterface;
+use App\Db\DbConnection;
 use App\Models\BlogModel;
 use Psr\Container\ContainerInterface;
 
