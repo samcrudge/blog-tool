@@ -4,6 +4,7 @@ namespace App\Models;
 
 class BlogModel
 {
+
     private $db;
 
     /**
@@ -12,10 +13,20 @@ class BlogModel
      */
     public function __construct($db)
     {
+
         $this->db = $db;
+
     }
 
-    public function GetAllEntries(): array
+    public function CreateNewEntry($blogPost): bool
+    {
+        $query = $this->db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`)
+                                        VALUES (:title , :author, :date, :post)');
+        return $queryCheck = $query->execute($blogPost);
+
+    }
+
+    public function ReadAllEntries(): array
     {
         $query = $this->db->query('SELECT `title`, `author`, `date`, `post`, `GUID`
                                     FROM `blog-posts` 
@@ -24,30 +35,24 @@ class BlogModel
 
     }
 
-
-    public function CreateNewEntry($blogPost): bool
-    {
-        $query = $this->db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`)
-                                        VALUES (:title , :author, :date, :post)');
-        $queryCheck = $query->execute($blogPost);
-        return $queryCheck;
-    }
-
-
-    public function EditEntry($editEntry): bool
+    public function UpdateEntry($editEntry): bool
     {
         $query = $this->db->prepare('UPDATE `blog-posts`
-                                        set `title` = :title, `date` = :date, `post` = post 
+                                        set `title` = :title,
+                                            `date` = :date,
+                                            `post` = :post 
                                         WHERE `GUID` = :GUID;');
-        $updatedEntry = $query->execute($editEntry);
-        return $updatedEntry;
-    }
+        return $updatedEntry = $query->execute($editEntry);
 
+    }
 
     public function DeleteEntry($deleteEntry): bool
     {
-        $query = $this->db->prepare('SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)');
-        $deletedEntry = $query->execute($deleteEntry);
-        return $deletedEntry;
+        $query = $this->db->prepare('UPDATE `blog-posts`
+                                        set `deleted` = 1 
+                                        WHERE `GUID` = :GUID;');
+        return $deleteEntry = $query->execute($deleteEntry);
+
     }
+
 }

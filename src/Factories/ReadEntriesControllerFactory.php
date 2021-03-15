@@ -2,17 +2,18 @@
 
 namespace App\Factories;
 
-use App\Controllers\AllEntriesController;
+use App\Controllers\ReadEntriesController;
 use Psr\Container\ContainerInterface;
 
-class AllEntriesControllerFactory
+class ReadEntriesControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
+
         $blogModel = $container->get('BlogModel');
         $renderer = $container->get('renderer');
-        $allEntriesController = new AllEntriesController($blogModel, $renderer);
-        return $allEntriesController;
+        return $readEntriesController = new ReadEntriesController($blogModel, $renderer);
+
     }
 
 }

@@ -31,26 +31,24 @@ class CreateNewEntryController extends Controller
                 'message' => '',
                 'data' => []
             ];
-        $blogDataPost = $request->getParsedBody();
-        $blogPost = new Validator($blogDataPost);
+        $newBlogPost = $request->getParsedBody();
+        $blogPost = new Validator($newBlogPost);
 
             if(!Validators::ValidateNewPost($blogPost)) {
                 $responseData['success'];
-                $responseData['message'] = 'Your post does not meet requirements';
                 $responseData['data'] = $blogPost->errors();
 
                 return $this->respondWithJson($response, $responseData, 500);
             }
-        $result = $this->blogModel->CreateNewEntry($blogDataPost);
-            if($result){
+        $dbExchange = $this->blogModel->CreateNewEntry($newBlogPost);
+            if($dbExchange){
                 $responseData['success'] = true;
-                $responseData['message'] = 'Your post has been successfully added!';
-                $responseData['data'] = $result;
+                $responseData['message'] = 'Your post has been successfully added to the database.';
 
             return $this->respondWithJson($response, $responseData, 200);
         }
         $responseData['success'];
-        $responseData['message'] = "something went wrong";
+        $responseData['message'] = "Something went wrong";
 
         return $this->respondWithJson($response, $responseData, 500);
     }

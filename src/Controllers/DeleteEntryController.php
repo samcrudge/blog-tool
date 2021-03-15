@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Abstracts\Controller;
+use App\Validators\Validators;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Valitron\Validator;
 
 class DeleteEntryController extends Controller
 {
@@ -28,25 +30,34 @@ class DeleteEntryController extends Controller
                 'data' => []
             ];
 
-        $blogPost = new Valitron\Validator($_POST);
-        $blogPost->rule('required', ['GUID']);
+        $deleteBlogPost = $request->getParsedBody();
+        $blogPost = new Validator($deleteBlogPost);
 
-        if ($blogPost->validate()) {
-            $result = $this->blogModel->DeleteEntry($blogPost);
-            if ($result) {
-                $ResponseData['success'] = true;
-                $ResponseData['message'] = "Your post has been successfully deleted!";
-                $ResponseData['data'] = $result;
-                return $this->respondWithJson($response->withHeader('Location', '/'), $responseData, 200);
-            } else {
+        if (!Validators::ValidateDelete($blogPost)) {
 
-                $responseData['success'];
-                $responseData['message'] = "Database cannot complete this task to ".$result.".";
+            $responseData['success'];
+            $responseData['message'] = 'Your post does not meet requirements';
+            $responseData['data'] = $blogPost->errors();
+            return $this->respondWithJson($response, $responseData, 500);
 
-                return $this->respondWithJson($response->withHeader('Location', '/'), $responseData, 500);
-            }
         }
 
+        $dbExchange = $this->blogModel->DeleteEntry($deleteBlogPost);
+
+        if ($dbExchange) {
+
+            $responseData['success'] = true;
+            $responseData['message'] = "Your post has been successfully saved!";
+            $responseData['data'] = $deleteBlogPost;
+            return $this->respondWithJson($response, $responseData, 200);
+
+        }
+
+        $responseData['success'];
+        $responseData['message'] = "something went wrong";
+        $responseData['data'] = $blogPost;
+
+        return $this->respondWithJson($response, $responseData, 500);
     }
 
 }

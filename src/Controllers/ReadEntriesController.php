@@ -7,13 +7,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\PhpRenderer;
 
-class AllEntriesController extends Controller
+class ReadEntriesController extends Controller
 {
     private $blogModel;
     private $renderer;
 
     /**
-     * AllEntriesController constructor.
+     * ReadEntriesController constructor.
      * @param $blogModel
      * @param $renderer
      */
@@ -31,14 +31,14 @@ class AllEntriesController extends Controller
                 'message' => ''
             ];
 
-        $blogData = $this->blogModel->GetAllEntries();
+        $readAllPosts = $this->blogModel->ReadAllEntries();
 
-        if($blogData){
+        if($readAllPosts){
 
-            return $this->respondWithJson($response, $blogData, 200);
+            return $this->respondWithJson($response, $readAllPosts, 200);
         } else {
 
-            $responseData['message'] = 'No Data or Problem with DB';
+            $responseData['message'] = 'There was a problem with your request.';
             return $this->respondWithJson($response, $responseData, 500);
         }
 

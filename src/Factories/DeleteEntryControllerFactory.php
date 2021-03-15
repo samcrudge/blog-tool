@@ -2,16 +2,17 @@
 
 namespace App\Factories;
 
-use App\Controllers\EditEntryController;
+use App\Controllers\DeleteEntryController;
 use Psr\Container\ContainerInterface;
 
-class EditEntryControllerFactory
+class DeleteEntryControllerFactory
 {
     public function __invoke(ContainerInterface $container)
     {
+
         $blogModel = $container->get('BlogModel');
-        $editEntryController = new EditEntryController($blogModel);
-        return $editEntryController;
+        return $deleteEntryController = new DeleteEntryController($blogModel);
+
     }
 
 }

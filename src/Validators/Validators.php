@@ -13,10 +13,19 @@ class Validators {
         $unvalidated->rule('dateFormat', 'date', 'd-m-Y');
         $unvalidated->rule('lengthMin', 'post', 5);
 
-        return $unvalidated->validate();
+        if ($unvalidated->validate())
+        {
+            return $unvalidated;
+
+        } else {
+
+            throw new Exception('Please ensure all required fields are filled and meet requirements.');
+
+        }
+
     }
 
-    public static function ValidateEdit($unvalidated) {
+    public static function ValidateUpdate($unvalidated) {
         $unvalidated->rule('required', ['GUID', 'title', 'date', 'post']);
         $unvalidated->rule('lengthMin', 'post', 5);
         $unvalidated->rule('lengthMin', 'title', 1);
@@ -26,9 +35,28 @@ class Validators {
         if ($unvalidated->validate())
         {
             return $unvalidated;
+
         } else {
-            throw new Exception('Please ensure all required fields are filled.');
+
+            throw new Exception('Please ensure all required fields are filled and meet requirements.');
+
         }
+
+    }
+
+    public static function ValidateDelete($unvalidated) {
+        $unvalidated->rule('required', ['GUID']);
+
+        if ($unvalidated->validate())
+        {
+
+            return $unvalidated;
+
+        } else {
+
+            throw new Exception('Please ensure a post has been selected.');
+        }
+
     }
 
 

@@ -36,10 +36,10 @@ return function (ContainerBuilder $containerBuilder) {
     $container['db'] = new App\Db\DbConnection();
 
     $container['BlogModel'] = DI\factory('App\Factories\BlogModelFactory');
-    $container['AllEntriesController'] = DI\factory('App\Factories\AllEntriesControllerFactory');
     $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryControllerFactory');
-    $container['EditEntryController'] = DI\factory('App\Factories\EditEntryControllerFactory');
-    $container['DeleteNewEntryController'] = DI\factory('App\Factories\DeleteNewEntryControllerFactory');
+    $container['ReadEntriesController'] = DI\factory('App\Factories\ReadEntriesControllerFactory');
+    $container['UpdateEntryController'] = DI\factory('App\Factories\UpdateEntryControllerFactory');
+    $container['DeleteEntryController'] = DI\factory('App\Factories\DeleteEntryControllerFactory');
 
     $containerBuilder->addDefinitions($container);
 };
