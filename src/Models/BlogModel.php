@@ -25,33 +25,25 @@ class BlogModel
     }
 
 
-    public function CreateNewEntry($blogPost, $db): bool
+    public function CreateNewEntry($blogPost): bool
     {
-        $query = $db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`) 
-                                        VALUE (:title, :author, :date, :post)');
-        $addNewEntry = $query->execute([
-            ':title' => $blogPost['title'],
-            ':author' => $blogPost['author'],
-            ':date' => $blogPost['date'],
-            ':post' => $blogPost['post']
-            ]);
-        return $addNewEntry;
+        $query = $this->db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`)
+                                        VALUES (:title , :author, :date, :post)');
+        $queryCheck = $query->execute($blogPost);
+        return $queryCheck;
     }
 
 
     public function EditEntry($editEntry): bool
     {
-        $query = $this->db->prepare('SELECT `GUID` FROM `blog-posts` 
-                                        UPDATE (:title, :Date, :post)');
+        $query = $this->db->prepare('UPDATE `blog-posts`
+                                        set `title` = :title, `date` = :date, `post` = post 
+                                        WHERE `GUID` = :GUID;');
         $updatedEntry = $query->execute($editEntry);
         return $updatedEntry;
     }
 
-    /**
-     * @return bool
-     * Collects selected Post via `GUID` and soft deletes.
-     * Uses Prepare to avoid Mysql Injection.
-     */
+
     public function DeleteEntry($deleteEntry): bool
     {
         $query = $this->db->prepare('SELECT `GUID` FROM `blog-posts` UPDATE (:deleted)');

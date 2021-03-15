@@ -6,7 +6,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
     $container = $app->getContainer();
-
+    $app->addBodyParsingMiddleware();
     $app->get('/', function ($request, $response, $args) use ($container) {
         $renderer = $container->get('renderer');
         return $renderer->render($response, "index.php", $args);
@@ -14,12 +14,12 @@ return function (App $app) {
 
     #working
     $app->get('/all', 'AllEntriesController');
-
-    #working on
     $app->post('/new', 'CreateNewEntryController');
 
-    #ToDo
-    $app->post('/edit', 'EditEntryController');
+    #working-on
+    $app->put('/edit', 'EditEntryController');
+
+    #todo
     $app->post('/delete', 'DeleteEntryController');
 
 };

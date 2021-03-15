@@ -38,7 +38,7 @@ class AllEntriesController extends Controller
             return $this->respondWithJson($response, $blogData, 200);
         } else {
 
-            $responseData['message'] = 'Problem with DB';
+            $responseData['message'] = 'No Data or Problem with DB';
             return $this->respondWithJson($response, $responseData, 500);
         }
 

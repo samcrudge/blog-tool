@@ -6,6 +6,7 @@ use App\Abstracts\Controller;
 use App\Validators\Validators;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Valitron\Validator;
 
 class EditEntryController extends Controller
 {
@@ -29,17 +30,17 @@ class EditEntryController extends Controller
                 'data' => []
             ];
 
-        $blogPost = new Valitron\Validator($_POST);
-
-        try {
-            Validators::validateEdit($blogPost);
-        } catch (\throwable $e) {
+        $blogDataPost = $request->getParsedBody();
+        $blogPost = new Validator($blogDataPost);
+        if (!Validators::ValidateEdit($blogPost)) {
             $responseData['success'];
-            $responseData['message'] = $e->getMessage();
+            $responseData['message'] = 'Your post does not meet requirements';
+            $responseData['data'] = $blogPost->errors();
 
             return $this->respondWithJson($response, $responseData, 500);
         }
         $result = $this->blogModel->EditEntry($blogPost);
+        var_dump($result);
         if ($result) {
 
             $responseData['success'] = true;
@@ -47,7 +48,10 @@ class EditEntryController extends Controller
             $responseData['data'] = $result;
             return $this->respondWithJson($response, $responseData, 200);
         }
+        $responseData['success'];
+        $responseData['message'] = "something went wrong";
+        $responseData['data'] = $blogPost;
 
+        return $this->respondWithJson($response, $responseData, 500);
     }
-
 }
