@@ -37,9 +37,9 @@ return function (ContainerBuilder $containerBuilder) {
 
     $container['BlogModel'] = DI\factory('App\Factories\BlogModelFactory');
     $container['AllEntriesController'] = DI\factory('App\Factories\AllEntriesControllerFactory');
-    $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryController');
-    $container['EditEntryController'] = DI\factory('App\Factories\EditEntryController');
-    $container['DeleteNewEntryController'] = DI\factory('App\Factories\DeleteNewEntryController');
+    $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryControllerFactory');
+    $container['EditEntryController'] = DI\factory('App\Factories\EditEntryControllerFactory');
+    $container['DeleteNewEntryController'] = DI\factory('App\Factories\DeleteNewEntryControllerFactory');
 
     $containerBuilder->addDefinitions($container);
 };
