@@ -10,7 +10,7 @@ class DeleteEntryControllerFactory
     public function __invoke(ContainerInterface $container)
     {
 
-        $blogModel = $container->get('BlogModel');
+        $blogModel = $container->get('BlogModelInstanceInterface');
         return $deleteEntryController = new DeleteEntryController($blogModel);
 
     }

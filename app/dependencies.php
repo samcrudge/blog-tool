@@ -33,9 +33,9 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
-    $container['db'] = new App\Db\DbConnection();
+    $container['db'] = new App\Db\DbConnectionInterface();
 
-    $container['BlogModel'] = DI\factory('App\Factories\BlogModelFactory');
+    $container['BlogModelInstanceInterface'] = DI\factory('App\Factories\BlogModelFactory');
     $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryControllerFactory');
     $container['ReadEntriesController'] = DI\factory('App\Factories\ReadEntriesControllerFactory');
     $container['UpdateEntryController'] = DI\factory('App\Factories\UpdateEntryControllerFactory');

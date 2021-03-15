@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-class BlogModel
+use App\Interfaces\BlogModelInterface;
+
+
+class BlogModel implements BlogModelInterface
 {
 
     private $db;
