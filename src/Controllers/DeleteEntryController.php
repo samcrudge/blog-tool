@@ -3,21 +3,21 @@
 namespace App\Controllers;
 
 use App\Abstracts\Controller;
-use App\Interfaces\BlogModelInstanceInterface;
+
 use App\Validators\Validators;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Valitron\Validator;
 
-class DeleteEntryController extends Controller implements BlogModelInstanceInterface
+class DeleteEntryController extends Controller
 {
-    private BlogModelInstanceInterface $blogModel;
+    private $blogModel;
 
     /**
      * deleteEntryController constructor.
      * @param $blogModel
      */
-    public function __construct(BlogModelInstanceInterface $blogModel)
+    public function __construct($blogModel)
     {
         $this->blogModel = $blogModel;
     }
