@@ -8,42 +8,42 @@ use Valitron\Validator;
 
 class Validators implements ValidationInterface
 {
-    public static function validateNewPost($newBlogPost)
+    public static function validateNewPost($validationObject)
     {
-        $unvalidated = new Validator($newBlogPost);
-        $unvalidated->rule('required', ['title', 'author', 'date', 'post']);
-        $unvalidated->rule('lengthMin', 'title', 1);
-        $unvalidated->rule('lengthMin', 'author', 1);
-        $unvalidated->rule('dateFormat', 'date', 'd-m-Y');
-        $unvalidated->rule('lengthMin', 'post', 5);
-        if ($unvalidated->validate()) {
-            return $unvalidated;
+        $validation = new Validator($validationObject);
+        $validation->rule('required', ['title', 'author', 'date', 'post']);
+        $validation->rule('lengthMin', 'title', 1);
+        $validation->rule('lengthMin', 'author', 1);
+        $validation->rule('dateFormat', 'date', 'd-m-Y');
+        $validation->rule('lengthMin', 'post', 5);
+        if ($validation->validate()) {
+            return $validation;
         } else {
             throw new Exception('Please ensure all required fields are filled and meet requirements.');
         }
     }
 
-    public static function validateUpdate($unvalidated)
+    public static function validateUpdate($validationObject)
     {
-        $unvalidated->rule('required', ['GUID', 'title', 'date', 'post']);
-        $unvalidated->rule('lengthMin', 'post', 5);
-        $unvalidated->rule('lengthMin', 'title', 1);
-        $unvalidated->rule('lengthMin', 'author', 1);
-        $unvalidated->rule('dateFormat', 'date', 'd-m-Y');
+        $validationObject->rule('required', ['GUID', 'title', 'date', 'post']);
+        $validationObject->rule('lengthMin', 'post', 5);
+        $validationObject->rule('lengthMin', 'title', 1);
+        $validationObject->rule('lengthMin', 'author', 1);
+        $validationObject->rule('dateFormat', 'date', 'd-m-Y');
 
-        if ($unvalidated->validate()) {
-            return $unvalidated;
+        if ($validationObject->validate()) {
+            return $validationObject;
 
 
         }
         throw new Exception('Please ensure all required fields are filled and meet requirements.');
     }
 
-    public static function validateDelete($unvalidated)
+    public static function validateDelete($validationObject)
     {
-        $unvalidated->rule('required', ['GUID']);
-        if ($unvalidated->validate()) {
-            return $unvalidated;
+        $validationObject->rule('required', ['GUID']);
+        if ($validationObject->validate()) {
+            return $validationObject;
         }
         throw new Exception('Please ensure a post has been selected.');
     }
