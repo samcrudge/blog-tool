@@ -18,36 +18,36 @@ class BlogModel implements BlogModelInterface
         $this->db = $db;
     }
 
-    public function CreateNewEntry($blogPost): bool
+    public function createNewEntry($blogPost): bool
     {
         $query = $this->db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`)
                                         VALUES (:title , :author, :date, :post)');
-        return $queryCheck = $query->execute($blogPost);
+        return $query->execute($blogPost);
     }
 
-    public function ReadAllEntries(): array
+    public function readAllEntries(): array
     {
         $query = $this->db->query('SELECT `title`, `author`, `date`, `post`, `GUID`
                                     FROM `blog-posts` 
                                     WHERE `deleted` = 0;');
-         return $query = $query->fetchAll();
+         return $query->fetchAll();
     }
 
-    public function UpdateEntry($editEntry): bool
+    public function updateEntry($editEntry): bool
     {
         $query = $this->db->prepare('UPDATE `blog-posts`
                                         set `title` = :title,
                                             `date` = :date,
                                             `post` = :post 
                                         WHERE `GUID` = :GUID;');
-        return $updatedEntry = $query->execute($editEntry);
+        return $query->execute($editEntry);
     }
 
-    public function DeleteEntry($deleteEntry): bool
+    public function deleteEntry($deleteEntry): bool
     {
         $query = $this->db->prepare('UPDATE `blog-posts`
                                         set `deleted` = 1 
                                         WHERE `GUID` = :GUID;');
-        return $deleteEntry = $query->execute($deleteEntry);
+        return $query->execute($deleteEntry);
     }
 }

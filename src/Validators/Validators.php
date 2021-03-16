@@ -4,12 +4,13 @@ namespace App\Validators;
 
 use App\Interfaces\ValidationInterface;
 use Exception;
+use Valitron\Validator;
 
 class Validators implements ValidationInterface
 {
-
-    public static function ValidateNewPost($unvalidated): array
+    public static function validateNewPost($newBlogPost)
     {
+        $unvalidated = new Validator($newBlogPost);
         $unvalidated->rule('required', ['title', 'author', 'date', 'post']);
         $unvalidated->rule('lengthMin', 'title', 1);
         $unvalidated->rule('lengthMin', 'author', 1);
@@ -22,7 +23,7 @@ class Validators implements ValidationInterface
         }
     }
 
-    public static function ValidateUpdate($unvalidated)
+    public static function validateUpdate($unvalidated)
     {
         $unvalidated->rule('required', ['GUID', 'title', 'date', 'post']);
         $unvalidated->rule('lengthMin', 'post', 5);
@@ -37,7 +38,8 @@ class Validators implements ValidationInterface
         }
         throw new Exception('Please ensure all required fields are filled and meet requirements.');
     }
-    public static function ValidateDelete($unvalidated)
+
+    public static function validateDelete($unvalidated)
     {
         $unvalidated->rule('required', ['GUID']);
         if ($unvalidated->validate()) {

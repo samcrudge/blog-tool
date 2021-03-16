@@ -32,16 +32,16 @@ class CreateNewEntryController extends Controller implements BlogModelInstanceIn
             ];
 
         $newBlogPost = $request->getParsedBody();
-        $blogPost = new Validator($newBlogPost);
+        $validationObject = new Validator($newBlogPost);
 
-        if (!Validators::ValidateNewPost($blogPost)) {
-            $responseData['success'];
-            $responseData['data'] = $blogPost->errors();
+        if (!Validators::ValidateNewPost($validationObject)) {
+//            $responseData['success'];
+            $responseData['data'] = $validationObject->errors();
 
-            return $this->respondWithJson($response, $responseData, 500);
+            return $this->respondWithJson($response, $responseData, 400);
         }
 
-        $dbExchange = $this->blogModel->CreateNewEntry($newBlogPost);
+        $dbExchange = $this->blogModel->createNewEntry($newBlogPost);
 
         if ($dbExchange) {
             $responseData['success'] = true;
@@ -49,7 +49,7 @@ class CreateNewEntryController extends Controller implements BlogModelInstanceIn
             return $this->respondWithJson($response, $responseData, 200);
         }
 
-        $responseData['success'];
+//        $responseData['success'];
         $responseData['message'] = "Something went wrong";
         return $this->respondWithJson($response, $responseData, 500);
     }
