@@ -18,11 +18,11 @@ class BlogModel implements BlogModelInterface
         $this->db = $db;
     }
 
-    public function createNewEntry($blogPost): bool
+    public function createNewEntry($newBlogPost): bool
     {
         $query = $this->db->prepare('INSERT INTO `blog-posts` (`title`, `author`, `date`, `post`)
                                         VALUES (:title , :author, :date, :post)');
-        return $query->execute($blogPost);
+        return $query->execute($newBlogPost);
     }
 
     public function readAllEntries(): array
@@ -33,21 +33,21 @@ class BlogModel implements BlogModelInterface
          return $query->fetchAll();
     }
 
-    public function updateEntry($editEntry): bool
+    public function updateEntry($updatedBlogPostData): bool
     {
         $query = $this->db->prepare('UPDATE `blog-posts`
                                         set `title` = :title,
                                             `date` = :date,
                                             `post` = :post 
                                         WHERE `GUID` = :GUID;');
-        return $query->execute($editEntry);
+        return $query->execute($updatedBlogPostData);
     }
 
-    public function deleteEntry($deleteEntry): bool
+    public function deleteEntry($guid): bool
     {
         $query = $this->db->prepare('UPDATE `blog-posts`
                                         set `deleted` = 1 
                                         WHERE `GUID` = :GUID;');
-        return $query->execute($deleteEntry);
+        return $query->execute($guid);
     }
 }

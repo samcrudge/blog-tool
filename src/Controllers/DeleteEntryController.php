@@ -34,8 +34,7 @@ class DeleteEntryController extends Controller implements BlogModelInstanceInter
         $deleteBlogPost = $request->getParsedBody();
         $validationObject = new Validator($deleteBlogPost);
 
-        if (!Validators::ValidateDelete($validationObject)) {
-            $responseData['success'];
+        if (!Validators::validateDelete($validationObject)) {
             $responseData['message'] = 'Your post does not meet requirements';
             $responseData['data'] = $validationObject->errors();
             return $this->respondWithJson($response, $responseData, 400);
@@ -49,7 +48,6 @@ class DeleteEntryController extends Controller implements BlogModelInstanceInter
             $responseData['data'] = $deleteBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
         }
-        $responseData['success'];
         $responseData['message'] = "something went wrong";
         $responseData['data'] = $validationObject;
         return $this->respondWithJson($response, $responseData, 500);

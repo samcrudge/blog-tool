@@ -34,8 +34,7 @@ class CreateNewEntryController extends Controller implements BlogModelInstanceIn
         $newBlogPost = $request->getParsedBody();
         $validationObject = new Validator($newBlogPost);
 
-        if (!Validators::ValidateNewPost($validationObject)) {
-//            $responseData['success'];
+        if (!Validators::validateNewPost($validationObject)) {
             $responseData['data'] = $validationObject->errors();
 
             return $this->respondWithJson($response, $responseData, 400);
@@ -48,8 +47,6 @@ class CreateNewEntryController extends Controller implements BlogModelInstanceIn
             $responseData['message'] = 'Your post has been successfully added to the database.';
             return $this->respondWithJson($response, $responseData, 200);
         }
-
-//        $responseData['success'];
         $responseData['message'] = "Something went wrong";
         return $this->respondWithJson($response, $responseData, 500);
     }

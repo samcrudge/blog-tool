@@ -33,8 +33,7 @@ class UpdateEntryController extends Controllerv implements BlogModelInstanceInte
         $updatedBlogPost = $request->getParsedBody();
         $validationObject = new Validator($updatedBlogPost);
 
-        if (!Validators::ValidateUpdate($validationObject)) {
-            $responseData['success'];
+        if (!Validators::validateUpdate($validationObject)) {
             $responseData['message'] = 'Your post does not meet requirements';
             $responseData['data'] = $validationObject->errors();
             return $this->respondWithJson($response, $responseData, 400);
@@ -48,8 +47,6 @@ class UpdateEntryController extends Controllerv implements BlogModelInstanceInte
             $responseData['data'] = $updatedBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
         }
-
-        $responseData['success'];
         $responseData['message'] = "something went wrong";
         $responseData['data'] = $validationObject;
 
