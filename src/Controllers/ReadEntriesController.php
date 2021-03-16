@@ -36,7 +36,7 @@ class ReadEntriesController extends Controller
         if ($readAllPosts) {
             return $this->respondWithJson($response, $readAllPosts, 200);
         }
-        $responseData['message'] = 'There was a problem with your request.';
+        $responseData['message'] = "Something went wrong please try again.";
         return $this->respondWithJson($response, $responseData, 500);
     }
 }

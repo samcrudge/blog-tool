@@ -47,7 +47,7 @@ class UpdateEntryController extends Controllerv implements BlogModelInstanceInte
             $responseData['data'] = $updatedBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
         }
-        $responseData['message'] = "something went wrong";
+        $responseData['message'] = "Something went wrong please try again.";
         $responseData['data'] = $validationObject;
 
         return $this->respondWithJson($response, $responseData, 500);

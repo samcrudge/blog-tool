@@ -47,7 +47,7 @@ class CreateNewEntryController extends Controller implements BlogModelInstanceIn
             $responseData['message'] = 'Your post has been successfully added to the database.';
             return $this->respondWithJson($response, $responseData, 200);
         }
-        $responseData['message'] = "Something went wrong";
+        $responseData['message'] = "Something went wrong please try again.";
         return $this->respondWithJson($response, $responseData, 500);
     }
 }
