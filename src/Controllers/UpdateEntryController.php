@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Valitron\Validator;
 
-class UpdateEntryController extends Controllerv implements BlogModelInstanceInterface
+class UpdateEntryController extends Controller implements BlogModelInstanceInterface
 {
     private BlogModelInstanceInterface $blogModel;
 

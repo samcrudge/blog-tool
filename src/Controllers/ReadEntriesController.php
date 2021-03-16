@@ -28,12 +28,16 @@ class ReadEntriesController extends Controller
     {
         $responseData =
             [
-                'message' => ''
+                'success' => false,
+                'message' => '',
+                'data' => []
             ];
 
         $readAllPosts = $this->blogModel->ReadAllEntries();
 
         if ($readAllPosts) {
+            $responseData['success'] = true;
+            $responseData['message'] = "Your post has been successfully saved!";
             return $this->respondWithJson($response, $readAllPosts, 200);
         }
         $responseData['message'] = "Something went wrong please try again.";
