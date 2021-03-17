@@ -33,7 +33,13 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
-    $containerBuilder->addDefinitions($container);
+    $container['db'] = new App\Db\dbConnection();
 
-    $container['db'] = new \App\Db\DbConnection();
+    $container['BlogModelInstanceInterface'] = DI\factory('App\Factories\BlogModelFactory');
+    $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryControllerFactory');
+    $container['ReadEntriesController'] = DI\factory('App\Factories\ReadEntriesControllerFactory');
+    $container['UpdateEntryController'] = DI\factory('App\Factories\UpdateEntryControllerFactory');
+    $container['DeleteEntryController'] = DI\factory('App\Factories\DeleteEntryControllerFactory');
+
+    $containerBuilder->addDefinitions($container);
 };

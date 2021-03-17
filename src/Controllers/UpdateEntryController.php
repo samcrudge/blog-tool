@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Valitron\Validator;
 
-class CreateNewEntryController extends Controller
+class UpdateEntryController extends Controller
 {
     private $blogModel;
 
@@ -30,23 +30,26 @@ class CreateNewEntryController extends Controller
                 'data' => []
             ];
 
-        $newBlogPost = $request->getParsedBody();
-        $validationObject = new Validator($newBlogPost);
+        $updatedBlogPost = $request->getParsedBody();
+        $validationObject = new Validator($updatedBlogPost);
 
-        if (!PostValidation::validateNewPost($validationObject)) {
+        if (!PostValidation::validateUpdate($validationObject)) {
+            $responseData['message'] = 'Your post does not meet requirements';
             $responseData['data'] = $validationObject->errors();
-
             return $this->respondWithJson($response, $responseData, 400);
         }
 
-        $queryResult = $this->blogModel->createNewEntry($newBlogPost);
+        $queryResult = $this->blogModel->updateEntry($updatedBlogPost);
 
         if ($queryResult) {
             $responseData['success'] = true;
-            $responseData['message'] = 'Your post has been successfully added to the database.';
+            $responseData['message'] = "Your post has been successfully saved!";
+            $responseData['data'] = $updatedBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
         }
         $responseData['message'] = "Something went wrong please try again.";
+        $responseData['data'] = $validationObject;
+
         return $this->respondWithJson($response, $responseData, 500);
     }
 }
