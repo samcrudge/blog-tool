@@ -24,7 +24,9 @@ To update an existing posts in DB use:
 
 To soft delete a posts in DB use:
 ```/delete```
-
+<br>
+<br>
+<br>
 __Tests are being added later.__
 
 ~~To run these use~~ <br>
