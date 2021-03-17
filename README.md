@@ -9,7 +9,23 @@ Once cloned run
 then run
 ```Composer start```
 
-Tests are being added later.
+<br>
+<br>
+<br>
 
-To run these use 
+To create a new posts in DB use:
+```/create```
+
+To read all posts in DB use:
+```/read```
+
+To update an existing posts in DB use:
+```/update```
+
+To soft delete a posts in DB use:
+```/delete```
+
+__Tests are being added later.__
+
+~~To run these use~~ <br>
 ``` composer test```
