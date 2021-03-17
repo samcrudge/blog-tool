@@ -7,7 +7,7 @@ return function (App $app) {
 
     $app->addBodyParsingMiddleware();
 
-    $app->get('/', 'ReadEntriesController');
+    $app->get('/read', 'ReadEntriesController');
     $app->post('/create', 'CreateNewEntryController');
     $app->put('/update', 'UpdateEntryController');
     $app->delete('/delete', 'DeleteEntryController');

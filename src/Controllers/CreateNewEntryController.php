@@ -44,6 +44,7 @@ class CreateNewEntryController extends Controller
         if ($queryResult) {
             $responseData['success'] = true;
             $responseData['message'] = 'Your post has been successfully added to the database.';
+            $responseData['data'] = $newBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
         }
         $responseData['message'] = "Something went wrong please try again.";

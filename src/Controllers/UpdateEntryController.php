@@ -43,7 +43,7 @@ class UpdateEntryController extends Controller
 
         if ($queryResult) {
             $responseData['success'] = true;
-            $responseData['message'] = "Your post has been successfully saved!";
+            $responseData['message'] = "Your post has been successfully updated!";
             $responseData['data'] = $updatedBlogPost;
             return $this->respondWithJson($response, $responseData, 200);
         }

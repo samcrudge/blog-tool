@@ -10,7 +10,7 @@ class BlogModelFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $db = $container->get('db')->DbConnection();
+        $db = $container->get('db')->dbConnection();
         return $blogModel = new BlogModel($db);
     }
 }

@@ -44,7 +44,7 @@ class DeleteEntryController extends Controller
 
         if ($queryResult) {
             $responseData['success'] = true;
-            $responseData['message'] = "Your post has been successfully saved!";
+            $responseData['message'] = "Your post has been successfully deleted!";
             $responseData['data'] = $blogPostGuid;
             return $this->respondWithJson($response, $responseData, 200);
         }
