@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Abstracts\Controller;
 
-use App\Validators\Validators;
+use App\Validators\PostValidation;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Valitron\Validator;
@@ -34,15 +34,15 @@ class DeleteEntryController extends Controller
         $blogPostGuid = $request->getParsedBody();
         $validationObject = new Validator($blogPostGuid);
 
-        if (!Validators::validateDelete($validationObject)) {
+        if (!PostValidation::validateDelete($validationObject)) {
             $responseData['message'] = 'Your post does not meet requirements';
             $responseData['data'] = $validationObject->errors();
             return $this->respondWithJson($response, $responseData, 400);
         }
 
-        $dbExchange = $this->blogModel->deleteEntry($blogPostGuid);
+        $queryResult = $this->blogModel->deleteEntry($blogPostGuid);
 
-        if ($dbExchange) {
+        if ($queryResult) {
             $responseData['success'] = true;
             $responseData['message'] = "Your post has been successfully saved!";
             $responseData['data'] = $blogPostGuid;

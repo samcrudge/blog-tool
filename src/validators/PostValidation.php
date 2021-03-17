@@ -5,7 +5,7 @@ namespace App\Validators;
 use App\Interfaces\ValidationInterface;
 use Valitron\Validator;
 
-class Validators implements ValidationInterface
+class PostValidation implements ValidationInterface
 {
     public static function validateNewPost(Validator $validationObject): bool
     {

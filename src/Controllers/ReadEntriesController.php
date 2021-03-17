@@ -29,7 +29,6 @@ class ReadEntriesController extends Controller
         $responseData =
             [
                 'success' => false,
-                'message' => '',
                 'data' => []
             ];
 
@@ -37,8 +36,8 @@ class ReadEntriesController extends Controller
 
         if ($readAllPosts) {
             $responseData['success'] = true;
-            $responseData['message'] = "Your post has been successfully saved!";
-            return $this->respondWithJson($response, $readAllPosts, 200);
+            $responseData['data'] = $readAllPosts;
+            return $this->respondWithJson($response,$responseData, 200);
         }
         $responseData['message'] = "Something went wrong please try again.";
         return $this->respondWithJson($response, $responseData, 500);

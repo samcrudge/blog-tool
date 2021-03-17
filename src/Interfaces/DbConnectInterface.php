@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface DbConnectInterface
 {
-    public function DbConnection(): \PDO;
+    public function dbConnection(): \PDO;
 }

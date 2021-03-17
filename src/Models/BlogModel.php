@@ -25,7 +25,7 @@ class BlogModel implements BlogModelInterface
         return $query->execute($newBlogPost);
     }
 
-    public function readAllEntries(): array
+    public function readAllEntries()
     {
         $query = $this->db->query('SELECT `title`, `author`, `date`, `post`, `GUID`
                                     FROM `blog-posts` 

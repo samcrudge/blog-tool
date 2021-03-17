@@ -33,7 +33,7 @@ return function (ContainerBuilder $containerBuilder) {
         return $renderer;
     };
 
-    $container['db'] = new App\Db\DbConnection();
+    $container['db'] = new App\Db\dbConnection();
 
     $container['BlogModelInstanceInterface'] = DI\factory('App\Factories\BlogModelFactory');
     $container['CreateNewEntryController'] = DI\factory('App\Factories\CreateNewEntryControllerFactory');
