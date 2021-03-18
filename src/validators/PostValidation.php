@@ -10,22 +10,19 @@ class PostValidation implements ValidationInterface
     public static function validateNewPost(Validator $validationObject): bool
     {
         $validationObject->rule('required', ['title', 'author', 'date', 'post']);
-        $validationObject->rule('lengthMin', 'title', 1);
+        self::titleRule($validationObject);
+        self::dateRule($validationObject);
+        self::postRule($validationObject);
         $validationObject->rule('lengthMin', 'author', 1);
-        $validationObject->rule('dateFormat', 'date', 'd-m-Y');
-        $validationObject->rule('lengthMin', 'post', 5);
-
         return $validationObject->validate();
     }
 
     public static function validateUpdate(Validator $validationObject): bool
     {
         $validationObject->rule('required', ['GUID', 'title', 'date', 'post']);
-        $validationObject->rule('lengthMin', 'post', 5);
-        $validationObject->rule('lengthMin', 'title', 1);
-        $validationObject->rule('lengthMin', 'author', 1);
-        $validationObject->rule('dateFormat', 'date', 'd-m-Y');
-
+        self::titleRule($validationObject);
+        self::dateRule($validationObject);
+        self::postRule($validationObject);
         return $validationObject->validate();
     }
 
@@ -34,5 +31,20 @@ class PostValidation implements ValidationInterface
         $validationObject->rule('required', ['GUID']);
 
         return $validationObject->validate();
+    }
+
+    private static function titleRule($validationObject)
+    {
+        return $validationObject->rule('lengthMin', 'title', 1);
+    }
+
+    private static function dateRule($validationObject)
+    {
+        return $validationObject->rule('dateFormat', 'date', 'd-m-Y');
+    }
+
+    private static function postRule($validationObject)
+    {
+        return $validationObject->rule('lengthMin', 'post', 5);
     }
 }
